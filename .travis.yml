@@ -7,6 +7,9 @@ before_script:
 script:
 - inspec exec tests/default
 
+before_deploy:
+  - mkdir www && cp index.html www/.
+
 deploy:
 
   - provider: s3
