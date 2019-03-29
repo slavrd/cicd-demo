@@ -1,7 +1,35 @@
 language: generic
 dist: xenial
 sudo: required
+
 before_script: 
 - scripts/provision.sh
 script:
 - inspec exec tests/default
+
+deploy:
+
+  - provider: s3
+    access_key_id:
+      secure: "A2kBA7fhv2p4oxMFY97FZYfpRJJjLDm9dk0vMh9xErVo+KT3y2wYk0O6nf7JBd0YBcAXYoIyJp/Eziu0eoOr8LirSwVTOh1HFANMDCnDxP+KevusZLrEsxsyJ/vfmANMi9d2DwfV/OUO7ZDNpWhliFH3s6tnvZkXxM5MfURiLSg5I0SWlaQSXwTdoY241yUOqFc43FG4XuBuukDsmU6lhzLsuAoJeOKLHvaeEirT6CTIbUgfYMeiQDMVms81PKPa3HZOnXWS1iWlexZjVXB/oVNXPVAeAg13tPLeeLyvVEw3+1lduxAd9TT4I/DjpIAT1SNDc7J18LQgkHArEDZ5io93PUiwukR0Eb0n9NfejydOIdBcrtrguMP0Wvb/nzmz31h4xsldIct6fWe91IcWB3eq+HSXY5nYzLoZ/3i9d6GT1KICkZ35xA2Pbzm2/ctEZFN7O7dnuFPoc3GSGF7nKpmCtAk04hZXgX/E/h5BE+5oOtfv70AvsHUqmtW+lrzVg2Ed/cwbhrAz0rBg20w4e42bTr6S0Gy5JLZJNtZlkP6mwCwo+tOYb/o6dJJ0EcDcUyOsQtKUDWDOajP/O+RmY1u1uiASgtWG4WQ8ity7Z5LFxDVxpoE/ZPuOMswaaqNVvq2BHdVVxfcetW2/JbU2ntS6AdIhiVXnZ78z2QlBtyA="
+    secret_access_key:
+      secure: "W6lJ36AhLajzP6oIk0xkiWQR/egQsm6uZVWcqi+4wJVYcuDm6Y8hMnR7B2WDvqWYpZOvPkP/jhcZQl+VmeXrtfISbDMfighUvtVZxVT1ELVTwrglqdz9OysWRb5IxaSIT3mM3WA0VaOR/seVipEeikKYiuL0c4Kdi8tOAyBbBn5Ofif6V+2fYrzwCTD0mvGr5wG8eTrsO1R+Pe+V5Rw7J7ArxALM/yRrOyaZNvKxIJShZ2uMhpKEr67cH8q0cLBP4OE6O1CXZxN2m+UQ2N3tFOGlp5KbJ5VJc7c7R/ytiH8RIlzGBZOxPukfB2TprYb/HYg6gPJsiAtAECvu9MgyxULrdvrUnK2gIgiiCDi0goSdg66c+A8yD69/EqBn7850KWNSLoWiD7yYsnoOHTvyWxZPJqeQ8wkud0FMb1pS/YoEt8HZ3nUrBV0XK+k6WV66K41wksvmYpbV9h844QWTC5VGeQcUcCYB3h4y+x0AfxpKugZbOEF6h4mZY765mkkxRa93Rcx9JcVcxDCp+fM6vCYLh8DIjBxN9vON6y+1YLOsCqZLvwvBnhbS5ubyaHlUCxHaCFuaO0OTmZTwgHTsz1cbdLI3M1ngOw+6YQhOAP5csY1JEgI3IJwBh0sIJ0t/snktSLQ/a3+6D1OEVQSsnhhi7lzydc68qo7Sg+LTfPU="
+    bucket: cicd-demo-st
+    skip_cleanup: true
+    region: eu-central-1
+    local_dir: www
+    on:
+      tags: false
+      condition: "$TRAVIS_BRANCH =~ ^master$"
+
+  - provider: s3
+    access_key_id:
+      secure: "A2kBA7fhv2p4oxMFY97FZYfpRJJjLDm9dk0vMh9xErVo+KT3y2wYk0O6nf7JBd0YBcAXYoIyJp/Eziu0eoOr8LirSwVTOh1HFANMDCnDxP+KevusZLrEsxsyJ/vfmANMi9d2DwfV/OUO7ZDNpWhliFH3s6tnvZkXxM5MfURiLSg5I0SWlaQSXwTdoY241yUOqFc43FG4XuBuukDsmU6lhzLsuAoJeOKLHvaeEirT6CTIbUgfYMeiQDMVms81PKPa3HZOnXWS1iWlexZjVXB/oVNXPVAeAg13tPLeeLyvVEw3+1lduxAd9TT4I/DjpIAT1SNDc7J18LQgkHArEDZ5io93PUiwukR0Eb0n9NfejydOIdBcrtrguMP0Wvb/nzmz31h4xsldIct6fWe91IcWB3eq+HSXY5nYzLoZ/3i9d6GT1KICkZ35xA2Pbzm2/ctEZFN7O7dnuFPoc3GSGF7nKpmCtAk04hZXgX/E/h5BE+5oOtfv70AvsHUqmtW+lrzVg2Ed/cwbhrAz0rBg20w4e42bTr6S0Gy5JLZJNtZlkP6mwCwo+tOYb/o6dJJ0EcDcUyOsQtKUDWDOajP/O+RmY1u1uiASgtWG4WQ8ity7Z5LFxDVxpoE/ZPuOMswaaqNVvq2BHdVVxfcetW2/JbU2ntS6AdIhiVXnZ78z2QlBtyA="
+    secret_access_key:
+      secure: "W6lJ36AhLajzP6oIk0xkiWQR/egQsm6uZVWcqi+4wJVYcuDm6Y8hMnR7B2WDvqWYpZOvPkP/jhcZQl+VmeXrtfISbDMfighUvtVZxVT1ELVTwrglqdz9OysWRb5IxaSIT3mM3WA0VaOR/seVipEeikKYiuL0c4Kdi8tOAyBbBn5Ofif6V+2fYrzwCTD0mvGr5wG8eTrsO1R+Pe+V5Rw7J7ArxALM/yRrOyaZNvKxIJShZ2uMhpKEr67cH8q0cLBP4OE6O1CXZxN2m+UQ2N3tFOGlp5KbJ5VJc7c7R/ytiH8RIlzGBZOxPukfB2TprYb/HYg6gPJsiAtAECvu9MgyxULrdvrUnK2gIgiiCDi0goSdg66c+A8yD69/EqBn7850KWNSLoWiD7yYsnoOHTvyWxZPJqeQ8wkud0FMb1pS/YoEt8HZ3nUrBV0XK+k6WV66K41wksvmYpbV9h844QWTC5VGeQcUcCYB3h4y+x0AfxpKugZbOEF6h4mZY765mkkxRa93Rcx9JcVcxDCp+fM6vCYLh8DIjBxN9vON6y+1YLOsCqZLvwvBnhbS5ubyaHlUCxHaCFuaO0OTmZTwgHTsz1cbdLI3M1ngOw+6YQhOAP5csY1JEgI3IJwBh0sIJ0t/snktSLQ/a3+6D1OEVQSsnhhi7lzydc68qo7Sg+LTfPU="
+    bucket: cicd-demo-prod
+    skip_cleanup: true
+    region: eu-central-1
+    local_dir: www
+    on:
+      tags: true
