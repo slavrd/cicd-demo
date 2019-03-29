@@ -1,5 +1,7 @@
 language: generic
 dist: xenial
 sudo: required
+before_script: 
+- scripts/provision.sh
 script:
-  - exit 0
+- inspec exec tests/integration/default
