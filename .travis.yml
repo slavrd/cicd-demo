@@ -4,6 +4,8 @@ sudo: required
 
 before_script: 
 - scripts/provision.sh
+- sudo busybox httpd -f &
+
 script:
 - inspec exec tests/default
 
