@@ -18,6 +18,8 @@ The AWS API Key ID and Secret can be set by:
 
 The created infrastructure can be configured by setting the terraform variables in `variables.tf`. Read each variable's description to see what setting it does. How to set variable values in terraform is described [here](https://www.terraform.io/docs/configuration/variables.html#assigning-values-to-root-module-variables).
 
+Terraform is set to use the S3 remote backend. The backend configuration is in `main.tf` and needs to be set up or removed to use the local backend - [instructions](https://www.terraform.io/docs/backends/types/s3.html)
+
 * Manage infrastructure with Terraform:
   * `terraform plan` - shows what resources will be created/modified/destroyed
   * `terraform apply` - applies the planned changes
