@@ -1,0 +1,6 @@
+inspec.lock
+.terraform/
+*.tfstate*
+.ruby-version
+Gemfile.lock
+.kitchen/

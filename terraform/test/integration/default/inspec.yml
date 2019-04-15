@@ -1,0 +1,13 @@
+---
+name: default
+attributes:
+  - name: s3-bucket-names
+    type: array
+  - name: website-endpoints
+    type: array
+  - name: iam-user-access-key-id
+    type: string
+  - name: iam-user-secret-key-plain
+    type: string
+  - name: iam-user-name
+    type: string

@@ -1,0 +1,30 @@
+---
+driver:
+  name: terraform
+  variable_files:
+    - test.tfvars
+
+provisioner:
+  name: terraform
+
+platforms:
+  - name: AWSS3
+
+verifier:
+  name: terraform
+  format: doc
+  systems:
+
+    - name: aws
+      backend: aws
+      controls:
+        - aws_tests_bucket
+        - aws_tests_deploy_user
+
+    - name: remote
+      backend: local
+      controls:
+        - remote_tests
+
+suites:
+  - name: default
